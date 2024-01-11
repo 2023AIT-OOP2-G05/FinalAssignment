@@ -1,32 +1,35 @@
-写真基礎問題
+画像処理担当割り振りとそれぞれのファイル名
 
-色温度　  colorTemperature.py
-色被り補正  colorCastCorrection.py
-彩度 saturation.py
-露光量 exposureAmount.py
-コントラスト contrast.py
-ハイライト　highlight.py
+担当たがわ<br>
+写真基礎問題<br>
 
-
-色抜き問題
-
-青抜き　blueCut.py
-赤抜き　redCut.py
-緑抜き　greenCut.py
-青赤半分 blueRedHalf.py
-青緑半分 blueGreenHalf.py
-赤緑半分 redCut.py
+色温度　  colorTemperature.py<br>
+色被り補正  colorCastCorrection.py<br>
+彩度 saturation.py<br>
+露光量 exposureAmount.py<br>
+コントラスト contrast.py<br>
+ハイライト　highlight.py<br>
 
 
-写真基礎単語問題
+担当すぎやま<br>
+色抜き問題<br>
 
-色温度
-色被り補正
-彩度
-露光量
-コントラスト
-ハイライト
+青抜き　blueCut.py<br>
+赤抜き　redCut.py<br>
+緑抜き　greenCut.py<br>
+青赤半分 blueRedHalf.py<br>
+青緑半分 blueGreenHalf.py<br>
+赤緑半分 redCut.py<br>
 
-担当　田川
-画像処理の種類とファイル名
+
+担当いざわ<br>
+写真基礎単語問題　wordQuize.py<br>
+
+色温度<br>
+色被り補正<br>
+彩度<br>
+露光量<br>
+コントラスト<br>
+ハイライト<br>
+
 # FinalAssignment
