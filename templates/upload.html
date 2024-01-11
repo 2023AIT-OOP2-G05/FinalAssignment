@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>第11回課題</title>
+
+    <script defer src="{{ url_for('static', filename='upload.js') }}"></script>
+</head>
+<body>
+    <header>
+        <h1>画像のアップロード</h1>
+    </header>
+
+    <main>
+        <!--
+            <form method="post" enctype="multipart/form-data" action="/picture">
+                <input type="file" name="original-picture" required>
+                <button>Send</button>
+            </form>
+
+            // 動作自体はこれで問題ないが、
+            // 以下の<section id="send-by-js">にて.jsを用いたファイル送信を行っている
+            // .jsが不具合を起こした場合は、HTMLが直接送信を行う
+        -->
+
+        <section id="send-by-js">
+            <form method="post" id="input-picture" enctype="multipart/form-data" action="/picture">
+                <input type="file"
+                       name="original-picture"
+                       required="required"
+                       accept="image/*">
+                <button type="submit" id="upload-button">Send</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
