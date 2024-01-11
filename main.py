@@ -24,15 +24,7 @@ def getPicture():
     
     # ファイルの保存
     # (プロジェクトディレクトリ内のディレクトリ「uploads-picture/」に保存している)
-<<<<<<< Updated upstream
     file.save("uploadsPicture/" + file.filename)
-=======
-    file.save("uploads-picture/" + file.filename)
->>>>>>> Stashed changes
-
-
-# おそらく、この間に画像処理を挟む？
-
     
     # 保存が成功
     return "Success"
@@ -44,11 +36,7 @@ def index():
 
     print("ページが読み込まれました")
 
-<<<<<<< Updated upstream
     return render_template("upload.html")
-=======
-    return render_template("ImageProcessing.html")
->>>>>>> Stashed changes
 
 if __name__ == "__main__":
     # debugモードが不要の場合は、debug=Trueを消してください
