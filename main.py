@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
+import os, glob
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = './uploadsPicture'
 app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列を返したい場合は、こちらを設定しておく
 
 
@@ -28,6 +30,25 @@ def getPicture():
     
     # 保存が成功
     return "Success"
+
+
+# アップロード済み画像一覧
+@app.route('/uploadedList/')
+def uploaded_list():
+    files = glob.glob("./uploadsPicture/*")  # ./uploadsPicture/以下のファイルをすべて取得
+    urls = []
+    for file in files:
+        urls.append({
+            "filename": os.path.basename(file),
+            "url": "/uploaded/" + os.path.basename(file)
+        })
+    return render_template("pictureList.html", title="アップロード済み画像", page_title="アップロード済み画像　一覧", target_files=urls)
+
+
+@app.route('/uploaded/<path:filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 # http://127.0.0.1:5000/
 # Frask CORS
