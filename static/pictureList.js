@@ -51,5 +51,8 @@ startQuizButton.addEventListener("click", (event) => {
 
             location.href = "/test"
         })
+    } else {
+        // 画像が選択されていない場合にアラートを表示（追加）
+        alert("画像を選択してください");
     }
 })
