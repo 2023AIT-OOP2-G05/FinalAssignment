@@ -23,7 +23,7 @@
                             <a class="nav-link text-white" href="/">Topページ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/uploadedList">アップロード</a>
+                            <a class="nav-link text-white" href="/upAndDel">アップロード</a>
                         </li>
                     </ul>
                 </div>
@@ -44,13 +44,22 @@
             // .jsが不具合を起こした場合は、HTMLが直接送信を行う
         -->
 
-        <section id="send-by-js">
-            <form method="post" id="input-picture" enctype="multipart/form-data" action="/picture">
+        <section id="send-to-upload-picture">
+            <form method="post" id="input-picture" enctype="multipart/form-data" action="/upload">
                 <input type="file"
                        name="original-picture"
                        required="required"
                        accept="image/*">
-                <button type="submit" id="upload-button">Send</button>
+                <button type="submit" id="upload-button">送信</button>
+            </form>
+        </section>
+
+        <section id="send-to-delete-picture">
+            <form method="post" action="/delete" id="delete-picture">
+                <select name="picture-list" id="select-picture">
+                    <option id="selections">削除する画像を選択</option>
+                </select>
+                <button type="submit" id="delete-button">削除</button>
             </form>
         </section>
     </main>
