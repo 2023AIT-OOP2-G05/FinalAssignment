@@ -15,9 +15,26 @@ app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列
 # selectMode = ""
 # selectImage = ""
 
-
-@app.route("/picture", methods=["POST"])
+#現在アップロードされている画像の一覧を取得
+@app.route("/list", methods=["GET"])
 def getPicture():
+
+    files = glob.glob("./uploadsPicture/*")  # ./uploadsPicture/以下のファイルをすべて取得
+    urls = []
+    index = 0
+    for file in files:
+        urls.append({
+            "fileName": os.path.basename(file),
+        })
+        index = index + 1
+
+    print(urls)
+
+    return urls
+
+# 画像の保存を行う
+@app.route("/upload", methods=["POST"])
+def uploadPicture():
 
     # ボタン押下の確認メッセージ
     print("送信ボタンが押された")
@@ -41,6 +58,35 @@ def getPicture():
     # 保存が成功
     return "Success"
 
+# 画像の削除を行う
+@app.route("/delete", methods=["POST"])
+def deletePicture():
+
+    print("削除ボタン押下")
+    
+    # 削除ファイル名を取得
+    answer = request.data.decode("utf-8")
+
+    # ファイルが存在する場合のみ、削除を実行
+    if os.path.exists("uploadsPicture/" + answer) :
+        os.remove("uploadsPicture/" + answer)
+    else:
+        print("No_Such_File")
+
+    return "deleted"
+
+    # files = glob.glob("./uploadsPicture/*")  # ./uploadsPicture/以下のファイルをすべて取得
+    # urls = []
+    # index = 0
+    # for file in files:
+    #     urls.append({
+    #         "filename": os.path.basename(file),
+    #         "url": "/uploaded/" + os.path.basename(file),
+    #         "index": index
+    #     })
+    #     index = index + 1
+    # return render_template("pictureList.html", title="アップロード済み画像", page_title="画像処理クイズ", target_files=urls)
+
 
 # アップロード済み画像一覧
 @app.route('/')
@@ -56,6 +102,8 @@ def uploaded_list():
         })
         index = index + 1
     return render_template("pictureList.html", title="アップロード済み画像", page_title="画像処理クイズ", target_files=urls)
+
+
 
 # 変換前画像用エンドポイント
 @app.route('/uploaded/<path:filename>')
@@ -142,15 +190,15 @@ def check():
 
 # http://127.0.0.1:5000/
 # Flask CORS
-@app.route("/uploadedList")
+@app.route("/upAndDel")
 def index():
 
     print("ページが読み込まれました")
 
-    return render_template("upload.html")
+    return render_template("uploadAndDelete.html")
 
 
 if __name__ == "__main__":
     # debugモードが不要の場合は、debug=Trueを消してください
-    #app.run(debug=True)
-    app.run(host="localhost",port=8888,debug=True)
+    app.run(debug=True)
+    #app.run(host="localhost",port=8888,debug=True)
