@@ -1,9 +1,12 @@
+<!-- トップページの作成　画像をアップロードする -->
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>第11回課題</title>
+    <title>画像アップロード</title>
 
     <script defer src="{{ url_for('static', filename='upload.js') }}"></script>
 
@@ -20,8 +23,18 @@
                     <span class="navbar-brand text-white mb-0 h1">FinalAssignment</span>
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/uploadedList">アップロード済み</a>
+                            <a class="nav-link text-white" href="/quizList">Quiz</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/uploadedList/">アップロード済み</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/grayScaleList/">グレースケール</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/binaryList">二値化</a>
+                        </li>
+                        <!-- ここに追加していく追加された画像処理のページ -->
                     </ul>
                 </div>
             </nav>
