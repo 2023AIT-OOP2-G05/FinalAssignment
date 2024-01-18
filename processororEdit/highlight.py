@@ -1,17 +1,27 @@
 from PIL import Image, ImageEnhance
+import os, cv2
+from processororEdit.processorBase import processorBase
 
-def highlight(image_path, factor):
-    # 画像を開く
-    image = Image.open(image_path)
+class highlightProcessor(processorBase):
 
-    # 明るい領域を抽出
-    bright_pixels = image.point(lambda p: p * factor if p > 128 else p)
+    OUT_DIR = "./processoredPicture/highlight/"
 
-    # 調整後の画像を表示するか保存するかなどの処理を追加
-    bright_pixels.save("adjusted_image06.jpg")
 
-# 画像のパスとハイライトの調整係数を指定して呼び出す
-highlight("IMG_2405.jpg", 1.5)
+    def highlight(self, image_path, filepath, factor):
 
-if __name__ == "__main__":
-    highlight()
+        outFilename = os.path.basename(filepath)
+        img_redgreenCut = cv2.imread(filepath)
+
+
+        # 画像を開く
+        image = Image.open(image_path)
+
+        # 明るい領域を抽出
+        bright_pixels = image.point(lambda p: p * factor if p > 128 else p)
+
+        corrected_image = Image.fromarray(bright_pixels.astype('uint8'))
+        corrected_image.save(self.OUT_DIR + outFilename)
+        return(outFilename, 11)
+
+
+       

@@ -1,18 +1,32 @@
 from PIL import Image, ImageEnhance
+import os, cv2
 
-def colorTemperature(image_path, factor):
-    # 画像を開く
-    image = Image.open(image_path)
+from processororEdit.processorBase import processorBase
 
-    # 色温度を調整する
-    enhancer = ImageEnhance.Color(image)
-    adjusted_image = enhancer.enhance(factor)
+class colorTemperatureProcessor(processorBase):
 
-    # 変更後の画像を保存する
-    adjusted_image.save("adjusted_image01.jpg")
+    OUT_DIR = "./processoredPicture/colorTemperature/"
 
-# 画像のパスと色温度の調整係数を指定して呼び出す
-colorTemperature("IMG_2405.jpg", 1.5)
+    def colorTemperature(self, image_path, filepath, factor):
 
-if __name__ == "__main__":
-    colorTemperature()
+        outFilename = os.path.basename(filepath)
+        img_redgreenCut = cv2.imread(filepath)
+
+        # 画像を開く
+        image = Image.open(image_path)
+
+        # 色温度を調整する
+        enhancer = ImageEnhance.Color(image)
+        adjusted_image = enhancer.enhance(factor)
+        
+        corrected_image = Image.fromarray(adjusted_image.astype('uint8'))
+
+        corrected_image.save(self.OUT_DIR + outFilename)
+
+
+        return(outFilename, 6)
+
+
+
+
+

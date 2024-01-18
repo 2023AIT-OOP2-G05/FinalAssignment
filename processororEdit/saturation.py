@@ -1,18 +1,26 @@
 from PIL import Image, ImageEnhance
+import os, cv2
+from processororEdit.processorBase import processorBase
 
-def saturation(image_path, factor):
-    # 画像を開く
-    image = Image.open(image_path)
+class saturationProcessor(processorBase):
 
-    # 彩度を調整する
-    enhancer = ImageEnhance.Color(image)
-    saturated_image = enhancer.enhance(factor)
+    OUT_DIR = "./processoredPicture/saturation/"
 
-    # 調整後の画像を表示するか保存するかなどの処理を追加
-    saturated_image.save("adjusted_image03.jpg")
+    def saturation(self, image_path, filepath, factor):
 
-# 画像のパスと彩度の調整係数を指定して呼び出す
-saturation("IMG_2405.jpg", 3)
+        outFilename = os.path.basename(filepath)
+        img_redgreenCut = cv2.imread(filepath)
 
-if __name__ == "__main__":
-    saturation()
+        # 画像を開く
+        image = Image.open(image_path)
+
+        # 彩度を調整する
+        enhancer = ImageEnhance.Color(image)
+        saturated_image = enhancer.enhance(factor)
+
+        
+        corrected_image = Image.fromarray(saturated_image.astype('uint8'))
+        corrected_image.save(self.OUT_DIR + outFilename)
+        return(outFilename, 8)
+
+   

@@ -1,18 +1,23 @@
 from PIL import Image, ImageEnhance
+import os, cv2
+from processororEdit.processorBase import processorBase
 
-def contrast(image_path, factor):
-    # 画像を開く
-    image = Image.open(image_path)
+class contrastProcessor(processorBase):
+    
+    OUT_DIR = "./processoredPicture/contrast/"
 
-    # コントラストを調整する
-    enhancer = ImageEnhance.Contrast(image)
-    high_contrast_image = enhancer.enhance(factor)
+    def contrast(self, image_path, filepath, factor):
 
-    # 調整後の画像を表示するか保存するかなどの処理を追加
-    high_contrast_image.save("adjusted_image05.jpg")
+        outFilename = os.path.basename(filepath)
+        img_redgreenCut = cv2.imread(filepath)
 
-# 画像のパスとコントラストの調整係数を指定して呼び出す
-contrast("IMG_2405.jpg", 1.5)
+        # 画像を開く
+        image = Image.open(image_path)
 
-if __name__ == "__main__":
-    contrast()
+        # コントラストを調整する
+        enhancer = ImageEnhance.Contrast(image)
+        high_contrast_image = enhancer.enhance(factor)
+        
+        corrected_image = Image.fromarray(high_contrast_image.astype('uint8'))
+        corrected_image.save(self.OUT_DIR + outFilename)
+        return(outFilename, 10)
