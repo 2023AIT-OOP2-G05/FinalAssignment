@@ -12,8 +12,8 @@ app.config['PROCESSED_FOLDER'] = './processedPicture'
 
 app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列を返したい場合は、こちらを設定しておく
 
-selectMode = ""
-selectImage = ""
+# selectMode = ""
+# selectImage = ""
 
 
 @app.route("/picture", methods=["POST"])
@@ -43,7 +43,7 @@ def getPicture():
 
 
 # アップロード済み画像一覧
-@app.route('/uploadedList')
+@app.route('/')
 def uploaded_list():
     files = glob.glob("./uploadsPicture/*")  # ./uploadsPicture/以下のファイルをすべて取得
     urls = []
@@ -55,7 +55,7 @@ def uploaded_list():
             "index": index
         })
         index = index + 1
-    return render_template("pictureList.html", title="アップロード済み画像", page_title="アップロード済み画像　一覧", target_files=urls)
+    return render_template("pictureList.html", title="アップロード済み画像", page_title="画像処理クイズ", target_files=urls)
 
 # 変換前画像用エンドポイント
 @app.route('/uploaded/<path:filename>')
@@ -142,7 +142,7 @@ def check():
 
 # http://127.0.0.1:5000/
 # Flask CORS
-@app.route("/")
+@app.route("/uploadedList")
 def index():
 
     print("ページが読み込まれました")
