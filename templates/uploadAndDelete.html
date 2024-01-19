@@ -30,7 +30,6 @@
             </nav>
         </header>
     </header>
-    <h1>画像のアップロード</h1>
 
     <main>
         <!--
@@ -44,22 +43,29 @@
             // .jsが不具合を起こした場合は、HTMLが直接送信を行う
         -->
 
-        <section id="send-to-upload-picture">
-            <form method="post" id="input-picture" enctype="multipart/form-data" action="/upload">
-                <input type="file"
-                       name="original-picture"
-                       required="required"
-                       accept="image/*">
-                <button type="submit" id="upload-button">送信</button>
+        <section class="mt-5" id="send-to-upload-picture" style="padding-left: 10%; padding-right: 10%;">
+
+            <h1 class="text-center">画像のアップロード</h1>
+
+            <form class="row" method="post" id="input-picture" enctype="multipart/form-data" action="/upload">
+                <div class="col-md-10">
+                    <input class="form-control form-control-lg" type="file" name="original-picture" required="required" accept="image/*">
+                </div>
+                <button class="btn btn-lg btn-primary col-md-2" type="submit" id="upload-button">送信</button>
             </form>
         </section>
 
-        <section id="send-to-delete-picture">
-            <form method="post" action="/delete" id="delete-picture">
-                <select name="picture-list" id="select-picture">
-                    <option id="selections">削除する画像を選択</option>
-                </select>
-                <button type="submit" id="delete-button">削除</button>
+        <section class="mt-5" id="send-to-delete-picture" style="padding-left: 10%; padding-right: 10%;">
+
+            
+            <form class="row" method="post" action="/delete" id="delete-picture">
+                <h1 class="text-center col-12">画像の削除</h1>
+                <div class="col-md-10">
+                    <select class="form-select form-select-lg" name="picture-list" id="select-picture">
+                        <option id="selections">削除する画像を選択</option>
+                    </select>
+                </div>
+                <button class="btn btn-lg btn-danger col-md-2" type="submit" id="delete-button">削除</button>
             </form>
         </section>
     </main>
