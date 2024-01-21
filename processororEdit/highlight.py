@@ -7,7 +7,7 @@ class highlightProcessor(processorBase):
     OUT_DIR = "./processoredPicture/highlight/"
 
 
-    def highlight(self, image_path, filepath, factor):
+    def process(self, image_path, filepath, factor):
 
         outFilename = os.path.basename(filepath)
         img_redgreenCut = cv2.imread(filepath)

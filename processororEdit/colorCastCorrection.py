@@ -8,7 +8,7 @@ class colorCastCorrectionProcessor(processorBase):
 
     OUT_DIR = "./processoredPicture/colorCastCorrection/"
 
-    def colorCastCorrection(self, filepath, red_factor, green_factor, blue_factor):
+    def process(self, filepath, red_factor, green_factor, blue_factor):
 
         outFilename = os.path.basename(filepath)
         img_redgreenCut = cv2.imread(filepath)

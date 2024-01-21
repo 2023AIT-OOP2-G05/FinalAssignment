@@ -7,7 +7,7 @@ class colorTemperatureProcessor(processorBase):
 
     OUT_DIR = "./processoredPicture/colorTemperature/"
 
-    def colorTemperature(self, image_path, filepath, factor):
+    def process(self, image_path, filepath, factor):
 
         outFilename = os.path.basename(filepath)
         img_redgreenCut = cv2.imread(filepath)
