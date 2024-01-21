@@ -52,34 +52,34 @@ def colorTemperature(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(colorTemperatureProcessor.colorTemperature(filePath))
+    return(colorTemperatureProcessor.process(filePath))
 
 def colorCastCorrection(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(colorCastCorrectionProcessor.colorCastCorrection(filePath))
+    return(colorCastCorrectionProcessor.process(filePath))
 
 def saturation(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(saturationProcessor.saturation(filePath))
+    return(saturationProcessor.process(filePath))
 
 def exposureAmount(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(exposureAmountProcessor.exposureAmount(filePath))
+    return(exposureAmountProcessor.process(filePath))
 
 def contrast(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(contrastProcessor.contrast(filePath))
+    return(contrastProcessor.process(filePath))
 
 def highlight(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(highlightProcessor.highlight(filePath))
+    return(highlightProcessor.process(filePath))
