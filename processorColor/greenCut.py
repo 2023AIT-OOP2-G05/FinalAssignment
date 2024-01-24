@@ -1,21 +1,28 @@
-import numpy as np
+import os
 import cv2
-def greenCut():
-    img = cv2.imread('sample.jpg')
 
-    rows,cols,channels = img.shape
+from processorColor.processorBase import processorBase
 
-    # 青色を消す
-    for y in range(rows):
-        for x in range(cols):
-            b, g, r = img[y, x]
-            # もし画素が白色だったな何もしない
-            if (b, g, r) == (255, 255, 255):
-                continue
-            img[y, x] = b, 0, r
+class greenCutProcessor(processorBase):
 
-    # 編集した画像を保存する
-    cv2.imwrite('green_cut.jpg', img)
+    OUT_DIR = "./processoredPicture/greenCut/"
 
-if __name__ == "__main__":
-    greenCut()
+    def process(self, filepath):
+        outFilename = os.path.basename(filepath)
+        img_greenCut = cv2.imread(filepath)
+    
+        # 画像処理
+        rows, cols, channels = img_greenCut.shape
+        # 画素から青色を消したい場合は次のように処理する
+        for y in range(rows):
+            for x in range(cols):
+                # 横x縦yの画素のカラーを取得(ここでは8bitRGB)
+                b, g, r = img_greenCut[y, x]
+                # もし画素が白色だったなら何もしない
+                if (b, g, r) == (255, 255, 255):
+                    continue
+                img_greenCut[y, x] = b, 0, r
+
+        cv2.imwrite(self.OUT_DIR + outFilename, img_greenCut)
+
+        return(outFilename, 2)
