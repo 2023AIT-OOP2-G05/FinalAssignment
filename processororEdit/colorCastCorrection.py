@@ -11,7 +11,7 @@ class colorCastCorrectionProcessor(processorBase):
     def process(self, filepath, red_factor, green_factor, blue_factor):
 
         outFilename = os.path.basename(filepath)
-        img_redgreenCut = cv2.imread(filepath)
+        img_colorCastCorrection = cv2.imread(filepath)
 
         # 画像を開く
         image = Image.open(self, filepath)

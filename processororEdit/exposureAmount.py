@@ -9,7 +9,7 @@ class exposureAmountProcessor(processorBase):
     def process(self, image_path, filepath, factor):
 
         outFilename = os.path.basename(filepath)
-        img_redgreenCut = cv2.imread(filepath)
+        img_exposureAmount = cv2.imread(filepath)
 
         # 画像を開く
         image = Image.open(image_path)
