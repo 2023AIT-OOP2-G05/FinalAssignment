@@ -1,0 +1,90 @@
+/* quizForm.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #000000;
+    background-color: #3e9bff; 
+    padding: 10px; 
+  }
+  
+  h2 {
+    color: #333;
+    background-color: #eee; /* 背景色を薄い灰色に設定 */
+    padding: 10px; /* 適切な余白を追加 */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* #answer_input {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+
+  /* #ans1:checked + label {
+    background-color: #ddd; 
+  }
+  
+  #ans2:checked + label {
+    background-color: #ddd; 
+  }
+  
+  #ans3:checked + label {
+    background-color: #ddd; 
+  } */
+  
+  
+  /* label {
+    margin-right: 10px;
+    font-weight: bold; 
+  }
+  
+  input[type="radio"] {
+    position: static;
+    left: auto;
+  }
+  
+  
+  button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  } */
+  
