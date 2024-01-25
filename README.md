@@ -22,24 +22,23 @@
 担当たがわ<br>
 写真基礎問題<br>
 
-色温度　  colorTemperature.py<br>
-色被り補正  colorCastCorrection.py<br>
-彩度 saturation.py<br>
-露光量 exposureAmount.py<br>
-コントラスト contrast.py<br>
-ハイライト　highlight.py<br>
-
-
 担当すぎやま<br>
-色抜き問題<br>
+ 色抜き問題<br>　　　
+0 青抜き　blueCut.py<br>
+1 赤抜き　redCut.py<br>
+2 緑抜き　greenCut.py<br>
+3 青赤半分 blueRedHalf.py<br>
+4 青緑半分 blueGreenHalf.py<br>
+5 赤緑半分 redCut.py<br>
 
-青抜き　blueCut.py<br>
-赤抜き　redCut.py<br>
-緑抜き　greenCut.py<br>
-青赤半分 blueRedHalf.py<br>
-青緑半分 blueGreenHalf.py<br>
-赤緑半分 redCut.py<br>
-
+担当たがわ<br>
+写真基礎問題<br>
+6 色温度　  colorTemperature.py<br>
+7 色被り補正  colorCastCorrection.py<br>
+8 彩度 saturation.py<br>
+9 露光量 exposureAmount.py<br>
+10 コントラスト contrast.py<br>
+11 ハイライト　highlight.py<br>
 
 担当いざわ<br>
 写真基礎単語問題　wordQuize.py<br>
