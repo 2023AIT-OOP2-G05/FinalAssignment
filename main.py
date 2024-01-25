@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, jsonify
 import os, glob, json
 
 import processors
@@ -104,17 +104,6 @@ def uploaded_list():
     return render_template("pictureList.html", title="アップロード済み画像", page_title="画像処理クイズ", target_files=urls)
 
 
-
-# 変換前画像用エンドポイント
-@app.route('/uploaded/<path:filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-# 変換後画像用エンドポイント
-@app.route('/processed/<path:filename>')
-def processed_file(filename):
-    return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
-
 # 選択されたデータを'selectData.json'に保存
 @app.route('/setData', methods = ['POST'])
 def setData():
@@ -205,29 +194,66 @@ def test():
 @app.route("/checkAnswer", methods=["POST"])
 def check():
     # 回答を取得
-    answer = request.data.decode("utf-8")
+    # answer = request.data.decode("utf-8")
+    selectId = request.form.to_dict()
+    print(selectId["selectId"])
 
     with open('selectData.json') as f:
         # 既存のデータを読み込み
         jsonData = list(json.load(f))
     
-    selectData = jsonData[0]
+    # 押されたボタンの識別番号
+    jsonData[0]['selectId'] = selectId["selectId"]
 
-    # おそらく、この部分の返り値はresult.htmlのような、解説ページ等になると思われる
-    if (answer == selectData["idNum"]):
-        return "True"
+    # 正誤判定（正解:"True", 不正解:"False"）
+    if jsonData[0]["idNum"] == selectId["selectId"]:
+        jsonData[0]["result"] = "True"
     else:
-        return "False"
+        jsonData[0]["result"] = "False"
+
+    with open('selectData.json', mode="w") as f:
+        # 選択されたデータを'selectData.json'に上書き
+        json.dump(jsonData, f, indent=4)
+    return jsonify(jsonData)
+
+
+# 解説ページ
+@app.route('/answerPage')
+def answerPage():
+    with open('selectData.json') as f:
+        # 既存のデータを読み込み
+        jsonData = list(json.load(f))
+
+    mode = jsonData[0]["mode"]
+    selectId = jsonData[0]["selectId"]
+    print("mode -> ", mode, "id -> ", selectId)
+
+    selectData = jsonData[0]
+    # 変換前画像パスを追加
+    selectData.update(image="/uploaded/" + selectData['image'])
+    # 変換後の画像パスを追加
+    selectData.update(question="/processed/" + selectData['question'])
+
+    return render_template("answerPageLayout.html", data=selectData)
 
 
 # http://127.0.0.1:5000/
 # Flask CORS
 @app.route("/upAndDel")
 def index():
-
     print("ページが読み込まれました")
-
     return render_template("uploadAndDelete.html")
+
+
+# 変換前画像用エンドポイント
+@app.route('/uploaded/<path:filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+# 変換後画像用エンドポイント
+@app.route('/processed/<path:filename>')
+def processed_file(filename):
+    return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
 
 
 if __name__ == "__main__":

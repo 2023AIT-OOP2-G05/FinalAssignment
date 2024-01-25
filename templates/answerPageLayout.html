@@ -43,13 +43,15 @@
             <div class="row col-12">
                 <div class="col-md-5 mt-3">
                     <h2 class="text-center">変更前の画像</h2>
-                    <img class="" src="{{data['originalImage']}}" width="100%">
+                    <img src="{{ data['image'] }}" width="100%">
+                    
                 </div>
                 <div class="col-md-2">
                 </div>
                 <div class="col-md-5 mt-3">
                     <h2 class="text-center">変更後の画像(今は違う)</h2>
-                    <img src="{{ data['changedImage'] }}" class="changedImage" id="{{ data['answer'][0] }}" width="100%">
+                    <img src="{{ data['question'] }}" class="changedImage" width="100%">
+                    
                 </div>
                 
             </div>
@@ -59,7 +61,7 @@
                 <div class="box" style="border-left: 5px double #87ceeb; border-right: 5px double #87ceeb; background-color: #eee; padding: 2em;">
                     {% block content %}{% endblock %}
                 </div>
-                <button onclick="javascript:window.history.back(-1);return false;">もう一度問題に挑戦する</button> 
+                <button class="btn btn-primary" onclick="javascript:window.history.back(-1);return false;">もう一度問題に挑戦する</button> 
             </div>
             
         </div>
