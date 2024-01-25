@@ -226,7 +226,8 @@ def answerPage():
 
     mode = jsonData[0]["mode"]
     selectId = jsonData[0]["selectId"]
-    print("mode -> ", mode, "id -> ", selectId)
+    print("mode -> ",mode)
+    print("id -> ",selectId)
 
     selectData = jsonData[0]
     # 変換前画像パスを追加
