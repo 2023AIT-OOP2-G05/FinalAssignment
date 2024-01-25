@@ -4,12 +4,12 @@ from processorColor.greenCut import greenCutProcessor
 from processorColor.blueRedHalf import buleRedHalfProcessor
 from processorColor.blueGreenHalf import buleGreenHalfProcessor
 from processorColor.redGreenHalf import redGreenHalfProcessor
-from processororEdit.colorTemperature import  colorTemperatureProcessor
-from processororEdit.colorCastCorrection import colorCastCorrectionProcessor
-from processororEdit.saturation import saturationProcessor
-from processororEdit.exposureAmount import exposureAmountProcessor
-from processororEdit.contrast import contrastProcessor
-from processororEdit.highlight import highlightProcessor
+from processorEdit.colorTemperature import  colorTemperatureProcessor
+from processorEdit.colorCastCorrection import colorCastCorrectionProcessor
+from processorEdit.saturation import saturationProcessor
+from processorEdit.exposureAmount import exposureAmountProcessor
+from processorEdit.contrast import contrastProcessor
+from processorEdit.highlight import highlightProcessor
 import os
 
 def blue(filePath):
