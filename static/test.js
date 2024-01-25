@@ -27,6 +27,12 @@ btnSearch.addEventListener("click", (event) => {
       .then(text => {
         if (text == "True") {
                 alert("正解です！！")
+
+                fetch("/checkAnswer", {
+                    method: "POST",
+                    body: yourAnswer,
+                })
+                
             } else {
                 alert("不正解です...")
             }

@@ -30,19 +30,19 @@ def green(filePath):
 
     return(greenCutProcessor.process(filePath))
 
-def bluered(filePath):
+def blueRed(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
     return(buleRedHalfProcessor.process(filePath))
 
-def bluegreen(filePath):
+def blueGreen(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
     return(buleGreenHalfProcessor.process(filePath))
 
-def redgreen(filePath):
+def redGreen(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
