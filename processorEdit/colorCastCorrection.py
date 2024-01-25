@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import os, cv2
 
-from processororEdit.processorBase import processorBase
+from processorEdit.processorBase import processorBase
 
 class colorCastCorrectionProcessor(processorBase):
 
