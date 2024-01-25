@@ -41,22 +41,8 @@
 
 ## ディレクトリ構造
 
-.
-├── fuga.py
-├── fuga_dir
-│   ├── fuga
-│   └── fugafuga
-├── fugafuga.py
-├── fugahoge.py
-├── hoge.py
-└── hoge_dir
-    ├── hoge
-    └── hogehoge
 
-
-担当たがわ<br>
-写真基礎問題<br>
-
+## 画像処理の番号分け
 担当すぎやま<br>
  色抜き問題<br>　　　
 0 青抜き　blueCut.py<br>
@@ -74,16 +60,6 @@
 9 露光量 exposureAmount.py<br>
 10 コントラスト contrast.py<br>
 11 ハイライト　highlight.py<br>
-
-担当いざわ<br>
-写真基礎単語問題　wordQuize.py<br>
-
-色温度<br>
-色被り補正<br>
-彩度<br>
-露光量<br>
-コントラスト<br>
-ハイライト<br>
 
 # 問題（クイズ）のページ
 ## 画像選択とレベル（ジャンル)選択ページ<br>
