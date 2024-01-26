@@ -8,13 +8,16 @@ btnSearch.addEventListener("click", (event) => {
 
     // フォームの作成
     const selectAnswer = document.querySelector('.select-answer').answer;
-    let yourAnswer;
+    //let yourAnswer;
+    const yourAnswer = new FormData()
 
     // 選択された選択肢がどれか取得
     for (let i = 0; i < selectAnswer.length; i++) {
         if (selectAnswer[i].checked) {
             // 選択された回答を代入
-            yourAnswer = selectAnswer[i].value;
+            //yourAnswer = selectAnswer[i].value;
+            yourAnswer.append("selectId", selectAnswer[i].value)
+            console.log(...yourAnswer)
             break;
         }
     }
@@ -23,20 +26,10 @@ btnSearch.addEventListener("click", (event) => {
     fetch("/checkAnswer", {
         method: "POST",
         body: yourAnswer,
-    }).then(response => response.text()) // レスポンスをテキストとして取得
-      .then(text => {
-        if (text == "True") {
-                alert("正解です！！")
-
-                fetch("/checkAnswer", {
-                    method: "POST",
-                    body: yourAnswer,
-                })
-                
-            } else {
-                alert("不正解です...")
-            }
+    }).then(response => {
+        location.href = "/answerPage"
     });
+    
 
     // 選択された選択肢がどれか取得
     //selectAnswer = document.querySelector('.select-answer').answer
@@ -61,3 +54,36 @@ btnSearch.addEventListener("click", (event) => {
     //     alert("不正解です...")
     // }
 })
+
+
+// 解説ページへの遷移判定
+function judgeAnswerPage(yourAnswer) {
+    switch (yourAnswer) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        case 9:
+            break;
+        case 10:
+            break;
+        case 11:
+            break;
+        default:
+            break;
+    }
+}

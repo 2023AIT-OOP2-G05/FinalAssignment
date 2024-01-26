@@ -3,6 +3,8 @@
         "mode": "3",
         "image": "UnknownLights.jpg",
         "question": "UnknownLights_grayScale.jpg",
-        "idNum": "0"
+        "idNum": "0",
+        "selectId": "1",
+        "result": "False"
     }
 ]
