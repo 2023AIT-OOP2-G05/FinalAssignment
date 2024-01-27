@@ -14,6 +14,19 @@
         <!-- Bootstrap JS(compiled bundle) -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <title>画像選択　テスト</title>
+
+        <style>
+            #answer-button{
+                width: 50%;
+                margin: 0 auto;
+                display: block;
+            }
+            .col-md-2{
+                width: 10%;
+                margin-top: 150px;
+                display: block;
+            }
+        </style>
     </head>
     <body>
         <header class="sticky-top">
@@ -45,6 +58,7 @@
                     <img class="before-image" src="{{data['image']}}" width="100%">
                 </div>
                 <div class="col-md-2">
+                    <img src="{{ url-for('static', filename='yajirushi.png') }}" width="100%">
                 </div>
                 <div class="col-md-5 mt-3">
                     <h2 class="text-center">変更後の画像</h2>
@@ -67,7 +81,7 @@
                         <label class="btn btn-outline-secondary" for="select-2" style="width: 100%;">binary</label>
                     </div>
                     <div class="col-md-12 mt-4">
-                        <button class="btn btn-primary" id="answer-button" style="width: 100%;">解答を決定</button>
+                        <button class="btn btn-primary" id="answer-button">解答を決定</button>
                     </div>
                 </form>
             </div>
