@@ -4,7 +4,7 @@ from processororEdit.processorBase import processorBase
 
 class contrastProcessor(processorBase):
     
-    OUT_DIR = "./processoredPicture/contrast/"
+    OUT_DIR = "./processedPicture"
 
     def process(self, image_path, filepath, factor):
 

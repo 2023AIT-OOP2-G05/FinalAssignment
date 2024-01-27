@@ -6,7 +6,7 @@ from processororEdit.processorBase import processorBase
 
 class colorCastCorrectionProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/colorCastCorrection/"
+    OUT_DIR = "./processedPicture/"
 
     def process(self, filepath, red_factor, green_factor, blue_factor):
 

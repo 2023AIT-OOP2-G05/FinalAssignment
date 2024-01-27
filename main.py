@@ -114,53 +114,57 @@ def setData():
     
     # 変換前画像のファイル名を取得
     fileName = selectData["image"]
+    filePath = "./uploadsPicture/" + fileName
 
     # int型のモード識別用変数
     mode = int(selectData["mode"]) #元はstr
+    #selectData['mode'] = selectData["mode"]
 
     # 問題をランダムに選ぶためのrandom変数
-    num = random.randint(0,1)
+    num = random.randint(0,5)
 
     # processors戻り値を保持する変数(tuple型)
-    outputPath = None
+    outputPath = ["", ""]
+    processors.deleteOneImage("./processedPicture")
 
     if mode == 1:
         # Cut系
         match num:
             case 0:
-                outputPath = processors.blue("uploadsPicture/" +fileName)
+                outputPath = processors.blue(filePath)
+                #outputPath = processors.blue("./uploadsPicture/" + fileName)
             case 1:
-                outputPath = processors.red("uploadsPicture/" +fileName)
+                outputPath = processors.red(filePath)
             case 2:
-                outputPath = processors.green("uploadsPicture/" +fileName)
+                outputPath = processors.green(filePath)
             case 3:
-                outputPath = processors.blueRed("uploadsPicture/" +fileName)
+                outputPath = processors.blueRed(filePath)
             case 4:
-                outputPath = processors.blueGreen("uploadsPicture/" +fileName)
+                outputPath = processors.blueGreen(filePath)
             case 5:
-                outputPath = processors.redGreen("uploadsPicture/" +fileName)
+                outputPath = processors.redGreen(filePath)
     elif mode == 2:
         # Color系
         match num:
-            case 6:
-                outputPath = processors.colorTemperature("uploadsPicture/" +fileName)
-            case 7:
-                outputPath = processors.colorCastCorrection("uploadsPicture/" +fileName)
-            case 8:
-                outputPath = processors.saturation("uploadsPicture/" +fileName)
-            case 9:
-                outputPath = processors.exposureAmount("uploadsPicture/" +fileName)
-            case 10:
-                outputPath = processors.contrast("uploadsPicture/" +fileName)
-            case 11:
-                outputPath = processors.highlight("uploadsPicture/" +fileName)
+            case 0:
+                outputPath = processors.colorTemperature(filePath)
+            case 1:
+                outputPath = processors.colorCastCorrection(filePath)
+            case 2:
+                outputPath = processors.saturation(filePath)
+            case 3:
+                outputPath = processors.exposureAmount(filePath)
+            case 4:
+                outputPath = processors.contrast(filePath)
+            case 5:
+                outputPath = processors.highlight(filePath)
     elif mode == 3:
         # 文章問題ページへ遷移...？
         pass
 
     # 画像処理後のファイル名をjsonに追加
     selectData["question"] = outputPath[0]
-    selectData["idNum"] = outputPath[1]
+    selectData["idNum"] = str(outputPath[1])
 
 # 都築が追加--------------------↑-
 
@@ -186,6 +190,14 @@ def test():
     selectData.update(image="/uploaded/" + selectData['image'])
     # 変換後の画像パスを追加
     selectData.update(question="/processed/" + selectData['question'])
+    # 解答欄の選択肢を追加
+    if selectData['mode'] == "1":
+        selectData['sample'] = ["青抜き", "赤抜き", "緑抜き", "青赤半分", "青緑半分", "赤緑半分"]
+    elif selectData['mode'] == "2":
+        selectData['sample'] = ["色温度", "色被り補正", "彩度", "露光量", "コントラスト", "ハイライト"]
+    else:
+        selectData['sample'] = ["0", "1", "2", "3", "4", "5"]
+
     return render_template("test.html", data = selectData)
 
 #単語問題のページ
@@ -244,7 +256,7 @@ def check():
     with open('selectData.json', mode="w") as f:
         # 選択されたデータを'selectData.json'に上書き
         json.dump(jsonData, f, indent=4)
-    return jsonify(jsonData)
+    return jsonify(jsonData[0])
 
 
 # 解説ページ
@@ -254,16 +266,24 @@ def answerPage():
         # 既存のデータを読み込み
         jsonData = list(json.load(f))
 
+    with open('answer.json') as f:
+        # 既存のデータを読み込み
+        answerData = list(json.load(f))
+
     mode = jsonData[0]["mode"]
     selectId = jsonData[0]["selectId"]
     print("mode -> ",mode)
     print("id -> ",selectId)
+
+    print()
 
     selectData = jsonData[0]
     # 変換前画像パスを追加
     selectData.update(image="/uploaded/" + selectData['image'])
     # 変換後の画像パスを追加
     selectData.update(question="/processed/" + selectData['question'])
+    selectData['anstitle'] = answerData[0][mode][selectId]['anstitle']
+    selectData['anscontent'] = answerData[0][mode][selectId]['anscontent']
 
     return render_template("answerPageLayout.html", data=selectData)
 

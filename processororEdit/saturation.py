@@ -4,7 +4,7 @@ from processororEdit.processorBase import processorBase
 
 class saturationProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/saturation/"
+    OUT_DIR = "./processedPicture/"
 
     def process(self, image_path, filepath, factor):
 

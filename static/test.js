@@ -27,6 +27,14 @@ btnSearch.addEventListener("click", (event) => {
         method: "POST",
         body: yourAnswer,
     }).then(response => {
+        response.json().then((data) => {
+            console.log(data)
+            if (data.result == "True") {
+                alert("正解です！！")
+            } else {
+                alert("不正解です...")
+            }
+        })
         location.href = "/answerPage"
     });
     
@@ -54,36 +62,3 @@ btnSearch.addEventListener("click", (event) => {
     //     alert("不正解です...")
     // }
 })
-
-
-// 解説ページへの遷移判定
-function judgeAnswerPage(yourAnswer) {
-    switch (yourAnswer) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break;
-        case 7:
-            break;
-        case 8:
-            break;
-        case 9:
-            break;
-        case 10:
-            break;
-        case 11:
-            break;
-        default:
-            break;
-    }
-}

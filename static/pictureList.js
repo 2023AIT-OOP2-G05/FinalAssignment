@@ -19,7 +19,6 @@ startQuizButton.addEventListener("click", (event) => {
 
     selectImage = document.querySelector('.select-img').img
     let image = "";
-    console.log(selectImage.length)
 
     if (selectImage.length == undefined && document.getElementById("0").checked) {
         image = document.getElementById("0").value

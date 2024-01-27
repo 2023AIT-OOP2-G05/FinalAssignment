@@ -4,7 +4,7 @@ from processororEdit.processorBase import processorBase
 
 class highlightProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/highlight/"
+    OUT_DIR = "./processedPicture/"
 
 
     def process(self, image_path, filepath, factor):

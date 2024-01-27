@@ -5,7 +5,7 @@ from processororEdit.processorBase import processorBase
 
 class colorTemperatureProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/colorTemperature/"
+    OUT_DIR = "./processedPicture/"
 
     def process(self, image_path, filepath, factor):
 

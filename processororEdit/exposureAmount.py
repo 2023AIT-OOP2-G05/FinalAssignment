@@ -4,7 +4,7 @@ from processororEdit.processorBase import processorBase
 
 class exposureAmountProcessor(processorBase):
     
-    OUT_DIR = "./processoredPicture/exposureAmount/"
+    OUT_DIR = "./processedPicture"
 
     def process(self, image_path, filepath, factor):
 

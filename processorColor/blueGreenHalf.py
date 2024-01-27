@@ -5,7 +5,7 @@ from processorColor.processorBase import processorBase
 
 class buleGreenHalfProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/blueGreenCut/"
+    OUT_DIR = "./processedPicture/"
 
     def process(self, filepath):
         outFilename = os.path.basename(filepath)

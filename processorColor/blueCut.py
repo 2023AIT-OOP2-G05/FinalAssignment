@@ -5,9 +5,10 @@ from processorColor.processorBase import processorBase
 
 class buleCutProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/blueCut/"
+    OUT_DIR = "./processedPicture/"
 
     def process(self, filepath):
+        print("\n\n\n")
         outFilename = os.path.basename(filepath)
         img_blueCut = cv2.imread(filepath)
     
@@ -25,4 +26,6 @@ class buleCutProcessor(processorBase):
 
         cv2.imwrite(self.OUT_DIR + outFilename, img_blueCut)
 
-        return(outFilename, 0)
+        result = [outFilename, 0]
+        return result
+        #return(outFilename, 0)
