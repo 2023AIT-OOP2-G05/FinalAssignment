@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template, send_from_directory, jsonify
+from flask import redirect, url_for
+
 import os, glob, json
 
 import processors
@@ -114,53 +116,62 @@ def setData():
     
     # 変換前画像のファイル名を取得
     fileName = selectData["image"]
-
+    filepath = "uploadsPicture/" +fileName
+    print(selectData["image"])
     # int型のモード識別用変数
     mode = int(selectData["mode"]) #元はstr
-
+    print(selectData["mode"])
     # 問題をランダムに選ぶためのrandom変数
-    num = random.randint(0,1)
+    # num = random.randint(0,1)
 
     # processors戻り値を保持する変数(tuple型)
     outputPath = None
-
+    processors.deleteOneImage("./processedPicture")
+    
     if mode == 1:
-        # Cut系
+        
+        # 問題をランダムに選ぶためのrandom変数
+        num = random.randint(0,5)
         match num:
             case 0:
-                outputPath = processors.blue("uploadsPicture/" +fileName)
+                outputPath = processors.blue(filepath)
             case 1:
-                outputPath = processors.red("uploadsPicture/" +fileName)
+                outputPath = processors.red(filepath)
             case 2:
-                outputPath = processors.green("uploadsPicture/" +fileName)
+                outputPath = processors.green(filepath)
             case 3:
-                outputPath = processors.blueRed("uploadsPicture/" +fileName)
+                outputPath = processors.blueRed(filepath)
             case 4:
-                outputPath = processors.blueGreen("uploadsPicture/" +fileName)
+                outputPath = processors.blueGreen(filepath)
             case 5:
-                outputPath = processors.redGreen("uploadsPicture/" +fileName)
+                outputPath = processors.redGreen(filepath)
     elif mode == 2:
         # Color系
+        # 問題をランダムに選ぶためのrandom変数
+        num = random.randint(6,11)
         match num:
             case 6:
-                outputPath = processors.colorTemperature("uploadsPicture/" +fileName)
+                outputPath = processors.colorTemperature(filepath)
             case 7:
-                outputPath = processors.colorCastCorrection("uploadsPicture/" +fileName)
+                outputPath = processors.colorCastCorrection(filepath)
             case 8:
-                outputPath = processors.saturation("uploadsPicture/" +fileName)
+                outputPath = processors.saturation(filepath)
             case 9:
-                outputPath = processors.exposureAmount("uploadsPicture/" +fileName)
+                outputPath = processors.exposureAmount(filepath)
             case 10:
-                outputPath = processors.contrast("uploadsPicture/" +fileName)
+                outputPath = processors.contrast(filepath)
             case 11:
-                outputPath = processors.highlight("uploadsPicture/" +fileName)
+                outputPath = processors.highlight(filepath)
     elif mode == 3:
         # 文章問題ページへ遷移...？
+        # return redirect(url_for('wordquiz'))
         pass
 
+    
+    print(outputPath)
     # 画像処理後のファイル名をjsonに追加
     selectData["question"] = outputPath[0]
-    selectData["idNum"] = outputPath[1]
+    selectData["idNum"] = str(outputPath[1])
 
 # 都築が追加--------------------↑-
 
@@ -186,38 +197,44 @@ def test():
     selectData.update(image="/uploaded/" + selectData['image'])
     # 変換後の画像パスを追加
     selectData.update(question="/processed/" + selectData['question'])
+
+    # 解答欄の選択肢を追加
+    if selectData['mode'] == "1":
+        selectData['sample'] = ["青抜き", "赤抜き", "緑抜き", "青赤半分", "青緑半分", "赤緑半分"]
+    elif selectData['mode'] == "2":
+        selectData['sample'] = ["色温度", "色被り補正", "彩度", "露光量", "コントラスト", "ハイライト"]
     return render_template("test.html", data = selectData)
 
 #単語問題のページ
-# @app.route('/')
-# def index():
-#     #jsonファイルの読み込み
-#     with open('quiz.json') as f:
-#         json_data = json.load(f)
-#     #どの問題を選ぶか
-#     #解答の選択肢を選ぶ
-#     quesnum = random.randint(0,5)
-#     ansnum1 = quesnum
-#     ansnum2 = quesnum
-#     while(ansnum1==quesnum or ansnum2==quesnum or ansnum1==ansnum2):
-#         ansnum1 = random.randint(0,5)
-#         ansnum2 = random.randint(0,5)
+@app.route('/wordquiz')
+def wordquiz():
+    #jsonファイルの読み込み
+    with open('quiz.json') as f:
+        json_data = json.load(f)
+    #どの問題を選ぶか
+    #解答の選択肢を選ぶ
+    quesnum = random.randint(0,5)
+    ansnum1 = quesnum
+    ansnum2 = quesnum
+    while(ansnum1==quesnum or ansnum2==quesnum or ansnum1==ansnum2):
+        ansnum1 = random.randint(0,5)
+        ansnum2 = random.randint(0,5)
 
-#     #並べ替え前の選択肢を配列化
-#     cleandata = [json_data[quesnum]['question'], json_data[ansnum1]['question'], json_data[ansnum2]['question']]
+    #並べ替え前の選択肢を配列化
+    cleandata = [json_data[quesnum]['question'], json_data[ansnum1]['question'], json_data[ansnum2]['question']]
     
-#     #選択肢の並べ替え
-#     num1 = random.randint(0,2)
-#     num2 = num1
-#     num3 = num1
-#     while(num1==num2 or num2==num3 or num3==num1):
-#         num1 = random.randint(0,2)
-#         num2 = random.randint(0,2)
-#         num3 = random.randint(0,2)
-#     #問題選択肢を送るために辞書式にぶちこむ
-#     data = {'question':json_data[quesnum]['ans'], 'ans1':cleandata[num1], 'ans2':cleandata[num2],'ans3':cleandata[num3]}
+    #選択肢の並べ替え
+    num1 = random.randint(0,2)
+    num2 = num1
+    num3 = num1
+    while(num1==num2 or num2==num3 or num3==num1):
+        num1 = random.randint(0,2)
+        num2 = random.randint(0,2)
+        num3 = random.randint(0,2)
+    #問題選択肢を送るために辞書式にぶちこむ
+    data = {'question':json_data[quesnum]['ans'], 'ans1':cleandata[num1], 'ans2':cleandata[num2],'ans3':cleandata[num3]}
 
-#     return render_template('quizForm.html',data=data)
+    return render_template('quizForm.html',data=data)
 
 
 # 回答の正誤を判定
@@ -244,7 +261,7 @@ def check():
     with open('selectData.json', mode="w") as f:
         # 選択されたデータを'selectData.json'に上書き
         json.dump(jsonData, f, indent=4)
-    return jsonify(jsonData)
+    return jsonify(jsonData[0])
 
 
 # 解説ページ
@@ -253,7 +270,9 @@ def answerPage():
     with open('selectData.json') as f:
         # 既存のデータを読み込み
         jsonData = list(json.load(f))
-
+    with open('answer.json') as f:
+        # 既存のデータを読み込み
+        answerData = list(json.load(f))
     mode = jsonData[0]["mode"]
     selectId = jsonData[0]["selectId"]
     print("mode -> ",mode)
@@ -264,7 +283,8 @@ def answerPage():
     selectData.update(image="/uploaded/" + selectData['image'])
     # 変換後の画像パスを追加
     selectData.update(question="/processed/" + selectData['question'])
-
+    selectData['anstitle'] = answerData[0][mode][selectId]['anstitle']
+    selectData['anscontent'] = answerData[0][mode][selectId]['anscontent']
     return render_template("answerPageLayout.html", data=selectData)
 
 

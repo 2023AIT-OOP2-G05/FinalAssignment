@@ -41,16 +41,18 @@ startQuizButton.addEventListener("click", (event) => {
         formData.append("image", image)
 
         console.log("送信データ:formData", ...formData)
-
+        if(mode === "3"){
+            location.href = "/wordquiz";
+        } else {
         // データ登録のWeb APIを/add_ToDoをPOSTメソッドで呼び出す
         fetch("/setData", {
             method: 'POST',
             body: formData, // 登録するデータ(FormData形式)
         }).then((response) => {
             console.log("送信されたデータ", response)
-
-            location.href = "/test"
+                location.href = "/test";
         })
+        }
     } else {
         // 画像が選択されていない場合にアラートを表示（追加）
         alert("画像を選択してください");

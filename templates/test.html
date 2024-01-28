@@ -67,21 +67,39 @@
             </div>
             <!--回答ボタンの押下処理-->
             <div>
-                <form class="select-answer row col-12 mt-5">
+                <form class="select-answer row col-12 mt-3">
                     <div class="col-md-12">
                         <h2 class="text-center">解答欄</h2>
                     </div>
                     
-                    <div class="col-md-4">
-                        <input type="radio" class="btn-check" name="answer" id="select-1" autocomplete="off" value="0" checked>
-                        <label class="btn btn-outline-secondary" for="select-1" style="width: 100%;">grayScale</label>
+                    <div class="col-md-4 mb-3 mb-3">
+                        <input type="radio" class="btn-check" name="answer" id="select-0" autocomplete="off" value="0" checked>
+                        <label class="btn btn-outline-secondary" for="select-0" style="width: 100%;">{{ data['sample'][0] }}</label>
                     </div>
-                    <div class="col-md-4">
-                        <input type="radio" class="btn-check" name="answer" id="select-2" autocomplete="off" value="1">
-                        <label class="btn btn-outline-secondary" for="select-2" style="width: 100%;">binary</label>
+                    <div class="col-md-4 mb-3 mb-3">
+                        <input type="radio" class="btn-check" name="answer" id="select-1" autocomplete="off" value="1">
+                        <label class="btn btn-outline-secondary" for="select-1" style="width: 100%;">{{ data['sample'][1] }}</label>
+                    </div>
+
+                    <div class="col-md-4 mb-3 mb-3">
+                        <input type="radio" class="btn-check" name="answer" id="select-2" autocomplete="off" value="2">
+                        <label class="btn btn-outline-secondary" for="select-2" style="width: 100%;">{{ data['sample'][2] }}</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="radio" class="btn-check" name="answer" id="select-3" autocomplete="off" value="3">
+                        <label class="btn btn-outline-secondary" for="select-3" style="width: 100%;">{{ data['sample'][3] }}</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="radio" class="btn-check" name="answer" id="select-4" autocomplete="off" value="4">
+                        <label class="btn btn-outline-secondary" for="select-4" style="width: 100%;">{{ data['sample'][4] }}</label>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="radio" class="btn-check" name="answer" id="select-5" autocomplete="off" value="5">
+                        <label class="btn btn-outline-secondary" for="select-5" style="width: 100%;">{{ data['sample'][5] }}</label>
                     </div>
                     <div class="col-md-12 mt-4">
                         <button class="btn btn-primary" id="answer-button">解答を決定</button>
+
                     </div>
                 </form>
             </div>
