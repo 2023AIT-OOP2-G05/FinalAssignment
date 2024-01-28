@@ -147,7 +147,7 @@ def setData():
     elif mode == 2:
         # Color系
         # 問題をランダムに選ぶためのrandom変数
-        num = random.randint(5,11)
+        num = random.randint(6,11)
         match num:
             case 6:
                 outputPath = processors.colorTemperature(filepath)
@@ -202,8 +202,6 @@ def test():
         selectData['sample'] = ["青抜き", "赤抜き", "緑抜き", "青赤半分", "青緑半分", "赤緑半分"]
     elif selectData['mode'] == "2":
         selectData['sample'] = ["色温度", "色被り補正", "彩度", "露光量", "コントラスト", "ハイライト"]
-    else:
-        selectData['sample'] = ["0", "1", "2", "3", "4", "5"]
     return render_template("test.html", data = selectData)
 
 #単語問題のページ
