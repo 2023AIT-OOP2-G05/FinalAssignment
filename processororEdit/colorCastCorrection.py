@@ -2,16 +2,15 @@ from PIL import Image
 import numpy as np
 import os, cv2
 
-from processororEdit.processorBase import processorBase
 
-class colorCastCorrectionProcessor(processorBase):
+class colorCastCorrectionProcessor:
 
-    OUT_DIR = "./processoredPicture/colorCastCorrection/"
+    OUT_DIR = "./processedPicture/"
 
+    # 引数の数が多いためよくない
     def process(self, filepath, red_factor, green_factor, blue_factor):
 
         outFilename = os.path.basename(filepath)
-        img_colorCastCorrection = cv2.imread(filepath)
 
         # 画像を開く
         image = Image.open(self, filepath)

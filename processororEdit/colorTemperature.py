@@ -1,25 +1,26 @@
 from PIL import Image, ImageEnhance
 import os, cv2
-
+import numpy as np 
 from processororEdit.processorBase import processorBase
 
 class colorTemperatureProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/colorTemperature/"
+    OUT_DIR = "./processedPicture/"
 
-    def process(self, image_path, filepath, factor):
+    def process(self, filepath, factor):
 
         outFilename = os.path.basename(filepath)
-        img_colorTemperature = cv2.imread(filepath)
 
         # 画像を開く
-        image = Image.open(image_path)
+        image = Image.open(filepath)
 
         # 色温度を調整する
         enhancer = ImageEnhance.Color(image)
         adjusted_image = enhancer.enhance(factor)
         
-        corrected_image = Image.fromarray(adjusted_image.astype('uint8'))
+        adjusted_array = np.array(adjusted_image)
+
+        corrected_image = Image.fromarray(adjusted_array.astype('uint8'))
 
         corrected_image.save(self.OUT_DIR + outFilename)
 

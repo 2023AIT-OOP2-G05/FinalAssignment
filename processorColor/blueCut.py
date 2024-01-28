@@ -3,9 +3,9 @@ import cv2
 
 from processorColor.processorBase import processorBase
 
-class buleCutProcessor(processorBase):
+class blueCutProcessor(processorBase):
 
-    OUT_DIR = "./processoredPicture/blueCut/"
+    OUT_DIR = "./processedPicture/"
 
     def process(self, filepath):
         outFilename = os.path.basename(filepath)
