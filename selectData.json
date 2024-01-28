@@ -1,10 +1,8 @@
 [
     {
-        "mode": "3",
+        "mode": "2",
         "image": "UnknownLights.jpg",
-        "question": "UnknownLights_grayScale.jpg",
-        "idNum": "0",
-        "selectId": "1",
-        "result": "False"
+        "question": "UnknownLights.jpg",
+        "idNum": "10"
     }
 ]

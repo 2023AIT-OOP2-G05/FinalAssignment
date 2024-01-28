@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 class processorBase(ABC):
 
     @abstractmethod
-    def process(self, image_path, filepath, factor):
+    def process(self, filepath, factor):
         pass

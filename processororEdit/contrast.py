@@ -1,23 +1,25 @@
 from PIL import Image, ImageEnhance
 import os, cv2
+import numpy as np 
 from processororEdit.processorBase import processorBase
 
 class contrastProcessor(processorBase):
     
-    OUT_DIR = "./processoredPicture/contrast/"
+    OUT_DIR = "./processedPicture/"
 
-    def process(self, image_path, filepath, factor):
+    def process(self, filepath, factor):
 
         outFilename = os.path.basename(filepath)
-        img_Contrast = cv2.imread(filepath)
 
         # 画像を開く
-        image = Image.open(image_path)
+        image = Image.open(filepath)
 
         # コントラストを調整する
         enhancer = ImageEnhance.Contrast(image)
         high_contrast_image = enhancer.enhance(factor)
         
-        corrected_image = Image.fromarray(high_contrast_image.astype('uint8'))
+        high_contrast_array = np.array(high_contrast_image)
+        
+        corrected_image = Image.fromarray(high_contrast_array.astype('uint8'))
         corrected_image.save(self.OUT_DIR + outFilename)
         return(outFilename, 10)
