@@ -11,7 +11,7 @@ from processororEdit.exposureAmount import exposureAmountProcessor
 from processororEdit.contrast import contrastProcessor
 from processororEdit.highlight import highlightProcessor
 from GrayTest import grayScale
-import os
+import os, shutil
 
 # お試し
 # def grayScalePro(filePath):
@@ -92,3 +92,7 @@ def highlight(filePath):
 
     return(highlightProcessor().process(filePath, 1.5))
 
+
+def deleteOneImage(dir):
+     shutil.rmtree(dir)
+     os.mkdir(dir)

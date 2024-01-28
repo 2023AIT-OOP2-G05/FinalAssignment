@@ -126,7 +126,8 @@ def setData():
 
     # processors戻り値を保持する変数(tuple型)
     outputPath = None
-
+    processors.deleteOneImage("./processedPicture")
+    
     if mode == 1:
         
         # 問題をランダムに選ぶためのrandom変数
