@@ -25,7 +25,7 @@ class colorTemperatureProcessor(processorBase):
         corrected_image.save(self.OUT_DIR + outFilename)
 
 
-        return(outFilename, 6)
+        return(outFilename, 0)
 
 
 
