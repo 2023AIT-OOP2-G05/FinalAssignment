@@ -10,15 +10,7 @@ from processororEdit.saturation import saturationProcessor
 from processororEdit.exposureAmount import exposureAmountProcessor
 from processororEdit.contrast import contrastProcessor
 from processororEdit.highlight import highlightProcessor
-from GrayTest import grayScale
 import os, shutil
-
-# お試し
-# def grayScalePro(filePath):
-#     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
-#     # print(r) # True (存在する)
-
-#     return(grayScale.grayScaleAndBinary(filePath))
 
 def blue(filePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
