@@ -23,6 +23,6 @@ class saturationProcessor(processorBase):
 
         corrected_image = Image.fromarray(saturated_array.astype('uint8'))
         corrected_image.save(self.OUT_DIR + outFilename)
-        return(outFilename, 8)
+        return(outFilename, 2)
 
    

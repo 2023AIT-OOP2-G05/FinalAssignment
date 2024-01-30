@@ -111,8 +111,6 @@ def uploaded_list():
 def setData():
     print("setData")
     selectData = request.form.to_dict()
-
-# 都築が追加 (変更の必要あり) ----↓-
     
     # 変換前画像のファイル名を取得
     fileName = selectData["image"]
@@ -126,10 +124,11 @@ def setData():
 
     # processors戻り値を保持する変数(tuple型)
     outputPath = None
+    # 画像処理後の画像を保存するディレクトリを初期化
     processors.deleteOneImage("./processedPicture")
     
     if mode == 1:
-        
+        # Cut系
         # 問題をランダムに選ぶためのrandom変数
         num = random.randint(0,5)
         match num:
@@ -148,32 +147,29 @@ def setData():
     elif mode == 2:
         # Color系
         # 問題をランダムに選ぶためのrandom変数
-        num = random.randint(6,11)
+        num = random.randint(0,5)
         match num:
-            case 6:
+            case 0:
                 outputPath = processors.colorTemperature(filepath)
-            case 7:
+            case 1:
                 outputPath = processors.colorCastCorrection(filepath)
-            case 8:
+            case 2:
                 outputPath = processors.saturation(filepath)
-            case 9:
+            case 3:
                 outputPath = processors.exposureAmount(filepath)
-            case 10:
+            case 4:
                 outputPath = processors.contrast(filepath)
-            case 11:
+            case 5:
                 outputPath = processors.highlight(filepath)
     elif mode == 3:
         # 文章問題ページへ遷移...？
         # return redirect(url_for('wordquiz'))
         pass
 
-    
     print(outputPath)
     # 画像処理後のファイル名をjsonに追加
     selectData["question"] = outputPath[0]
     selectData["idNum"] = str(outputPath[1])
-
-# 都築が追加--------------------↑-
 
     # jsonデータの書き込み
     jsonData = list()
@@ -182,6 +178,7 @@ def setData():
     with open('selectData.json', mode="w") as f:
         # 選択されたデータを'selectData.json'に上書き
         json.dump(jsonData, f, indent=4)
+
     return render_template("pictureList.html")
 
 # クイズページの表示
@@ -236,7 +233,6 @@ def wordquiz():
 
     return render_template('quizForm.html',data=data)
 
-
 # 回答の正誤を判定
 @app.route("/checkAnswer", methods=["POST"])
 def check():
@@ -278,6 +274,22 @@ def answerPage():
     print("mode -> ",mode)
     print("id -> ",selectId)
 
+    # <!--TODO-->
+    # 
+    # おそらく、この辺りで解説ページ用の画像処理を行う必要がある
+    #
+    # 選出方法は、問題ランダム選出と同じく、
+    # match-case文でjsonのselectId(かな?)の値を分別すればいい
+    #
+    # 各画像処理関数の使用を変更する必要あり
+    # ・保存先のファイルパスを、呼び出し側で変更する必要がある
+    #   outputPath = processors.blueGreen("./processedPicture" +filepath) や
+    #   outputPath = processors.blueGreen("./explanationPicture" +filepath) のように
+    #
+    # ・解説用画像を保存するディレクトリを作成する必要がある(explanationPictureみたいな？)
+    #
+    # ・explanationPictureディレクトリの初期化も行う必要がある(この辺で初期化？)
+
     selectData = jsonData[0]
     # 変換前画像パスを追加
     selectData.update(image="/uploaded/" + selectData['image'])
@@ -305,7 +317,6 @@ def uploaded_file(filename):
 @app.route('/processed/<path:filename>')
 def processed_file(filename):
     return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
-
 
 if __name__ == "__main__":
     # debugモードが不要の場合は、debug=Trueを消してください

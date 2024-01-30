@@ -30,7 +30,7 @@ class colorCastCorrectionProcessor:
         corrected_image.save(self.OUT_DIR + outFilename)
 
 
-        return(outFilename, 7)
+        return(outFilename, 1)
 
 
     
