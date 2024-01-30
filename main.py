@@ -228,12 +228,22 @@ def wordquiz():
     num2 = num1
     num3 = num1
     while(num1==num2 or num2==num3 or num3==num1):
-        num1 = random.randint(0,2)
         num2 = random.randint(0,2)
         num3 = random.randint(0,2)
     #問題選択肢を送るために辞書式にぶちこむ
-    data = {'question':json_data[quesnum]['ans'], 'ans1':cleandata[num1], 'ans2':cleandata[num2],'ans3':cleandata[num3]}
+        if num1 == 0:
+            finalAnsNum = 0
+        elif num2 == 0:
+            finalAnsNum = 1
+        elif num3 == 0:
+            finalAnsNum = 2
 
+    json_data[-1]["finalAnsNum"] = finalAnsNum
+    with open('quiz.json', 'w') as f:
+        json.dump(json_data, f, indent=2)
+
+    data = {'question':json_data[quesnum]['ans'], 'ans1':cleandata[num1], 'ans2':cleandata[num2],'ans3':cleandata[num3],'finalAnsNum': finalAnsNum}
+    
     return render_template('quizForm.html',data=data)
 
 
@@ -263,6 +273,33 @@ def check():
         json.dump(jsonData, f, indent=4)
     return jsonify(jsonData[0])
 
+@app.route("/checkAnswer2", methods=["POST"])
+def check2():
+    # 回答を取得
+    # answer = request.data.decode("utf-8")
+    data = request.json
+    yourAnswer = data.get('answer')
+    try:
+    # 'yourAnswer' を int に変換できるか試みる
+        yourAnswer = int(yourAnswer)
+    except ValueError:
+        print("変換失敗")
+
+    with open('quiz.json') as f:
+        # 既存のデータを読み込み
+        jsonData = list(json.load(f))
+
+    print(yourAnswer)
+    print(jsonData[6]["finalAnsNum"])
+
+    answer = jsonData[6]["finalAnsNum"]
+
+    if yourAnswer  == answer:
+        result = 0
+    else:
+        result = 1
+    print("送信します")
+    return jsonify(result)
 
 # 解説ページ
 @app.route('/answerPage')

@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='quizForm.css') }}">
   </head>
   <body>
+    <header class="sticky-top">
+      <nav class="navbar navbar-light bg-dark">
+          <div class="container">
+              <span class="navbar-brand text-white mb-0 h1">FinalAssignment</span>
+              <ul class="nav">
+                  <li class="nav-item">
+                      <a class="nav-link text-white" href="/">Topページ</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-white" href="/upAndDel">アップロード</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+    </header>
     <main>
       <h1>
         これは何の説明であるか。
@@ -21,8 +36,8 @@
         </h2>
       </table>
 
-      <!-- <form action="/quiz/ans" method="POST"> -->
-        <!-- <p class id="answer_input">
+      <!-- <form action="/quiz/ans" method="POST">
+        <p class id="answer_input">
           <input type="radio" id="ans1" value="ans1" name="ans"/>
           <label for="ans1">{{ data.ans1 }}</label>
           <input type="radio" id="ans2" value="ans2" name="ans"/>
@@ -45,7 +60,7 @@
                   <label class="btn btn-outline-secondary" for="select-2" style="width: 100%;">{{ data.ans2 }}</label>
               </div>
               <div class="col-md-4">
-                <input type="radio" class="btn-check" name="answer" id="select-3" autocomplete="off" value="3">
+                <input type="radio" class="btn-check" name="answer" id="select-3" autocomplete="off" value="2">
                 <label class="btn btn-outline-secondary" for="select-3" style="width: 100%;">{{ data.ans3 }}</label>
             </div>
               <div class="col-md-12 mt-4">
@@ -53,8 +68,37 @@
               </div>
           </form>
       </div>
+
+      <!-- <div class="row col-md-12">
+        <div class="col-md-6">
+            <button class="btn btn-primary" onclick="javascript:window.history.back(-1);return false;">もう一度問題に挑戦する</button>
+        </div>
+        <div class="col-md-6 d-md-flex justify-content-md-end">
+            <form action="/">
+                <button type="submit" class="btn btn-primary">Topページに進む</button> 
+            </form> 
+      </div> -->
+
+      <div class="row col-md-12">
+        <div class="col-md-6 mt-3">
+            <button class="btn btn-primary" onclick="retryChallenge()">他の問題に挑戦する</button>
+        </div>
+        <div class="col-md-6 d-md-flex justify-content-md-end mt-3">
+            <form action="/">
+                <button type="submit" class="btn btn-primary">Topページに進む</button> 
+            </form> 
+        </div>
+      </div>
+      
+      <script>
+          function retryChallenge() {
+              // 現在のページを再読み込み
+              location.reload();
+          }
+      </script>
         <!-- <button type="submit">解答する</button> -->
       <!-- </form> -->
+      <script src="{{ url_for('static', filename='wordQuiz.js') }}"></script>
     </main>
   </body>
 </html>
