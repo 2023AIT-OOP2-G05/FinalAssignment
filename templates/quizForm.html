@@ -8,7 +8,23 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='quizForm.css') }}">
   </head>
-  <body>
+  
+  <body style="background-color: lightblue;">
+    <header class="sticky-top">
+      <nav class="navbar navbar-light bg-dark">
+          <div class="container">
+              <span class="navbar-brand text-white mb-0 h1">FinalAssignment</span>
+              <ul class="nav">
+                  <li class="nav-item">
+                      <a class="nav-link text-white" href="/Top">Topページ</a>
+                  </li>
+                  <li class="nav-item">
+                       <a class="nav-link text-white" href="/upAndDel">アップロード</a>
+                  </li>
+             </ul>
+          </div>
+      </nav>
+    </header>
     <main>
       <h1>
         これは何の説明であるか。
@@ -45,7 +61,7 @@
                   <label class="btn btn-outline-secondary" for="select-2" style="width: 100%;">{{ data.ans2 }}</label>
               </div>
               <div class="col-md-4">
-                <input type="radio" class="btn-check" name="answer" id="select-3" autocomplete="off" value="3">
+                <input type="radio" class="btn-check" name="answer" id="select-3" autocomplete="off" value="2">
                 <label class="btn btn-outline-secondary" for="select-3" style="width: 100%;">{{ data.ans3 }}</label>
             </div>
               <div class="col-md-12 mt-4">
@@ -53,7 +69,27 @@
               </div>
           </form>
       </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-6 mt-3">
+            <button class="btn btn-primary" onclick="retryChallenge()">他の問題に挑戦する</button>
+        </div>
+        <div class="col-md-6 d-md-flex justify-content-md-end mt-3">
+            <form action="/Top">
+                <button type="submit" class="btn btn-primary">Topページに進む</button> 
+            </form> 
+        </div>
+      </div>
+
+
+      <script>
+        function retryChallenge() {
+            // 現在のページを再読み込み
+            location.reload();
+        }
+      </script>
         <!-- <button type="submit">解答する</button> -->
+      <script src="{{ url_for('static', filename='wordQuiz.js') }}"></script>
       <!-- </form> -->
     </main>
   </body>

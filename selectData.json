@@ -1,11 +1,11 @@
 [
     {
-        "mode": "2",
+        "mode": "1",
         "image": "amayanPAUI7616_TP_V4.jpeg",
         "question": "amayanPAUI7616_TP_V4.jpeg",
-        "idNum": "3",
-        "selectId": "5",
-        "result": "False",
+        "idNum": "4",
+        "selectId": "4",
+        "result": "True",
         "explanation": "amayanPAUI7616_TP_V4.jpeg"
     }
 ]
