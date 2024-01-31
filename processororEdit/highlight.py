@@ -23,7 +23,7 @@ class highlightProcessor(processorBase):
         corrected_image = Image.fromarray(bright_array.astype('uint8'))
         corrected_image.save(self.OUT_DIR + outFilename)
 
-        return(outFilename, 11)
+        return(outFilename, 5)
 
 
        
