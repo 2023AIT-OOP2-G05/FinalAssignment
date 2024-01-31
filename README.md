@@ -54,12 +54,12 @@
 
 担当たがわ<br>
 写真基礎問題<br>
-6 色温度　  colorTemperature.py<br>
-7 色被り補正  colorCastCorrection.py<br>
-8 彩度 saturation.py<br>
-9 露光量 exposureAmount.py<br>
-10 コントラスト contrast.py<br>
-11 ハイライト　highlight.py<br>
+0 色温度　  colorTemperature.py<br>
+1 色被り補正  colorCastCorrection.py<br>
+2 彩度 saturation.py<br>
+3 露光量 exposureAmount.py<br>
+4 コントラスト contrast.py<br>
+5 ハイライト　highlight.py<br>
 
 # 問題（クイズ）のページ
 ## 画像選択とレベル（ジャンル)選択ページ<br>

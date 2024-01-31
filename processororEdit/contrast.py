@@ -22,4 +22,4 @@ class contrastProcessor(processorBase):
         
         corrected_image = Image.fromarray(high_contrast_array.astype('uint8'))
         corrected_image.save(self.OUT_DIR + outFilename)
-        return(outFilename, 10)
+        return(outFilename, 4)
