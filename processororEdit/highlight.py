@@ -5,15 +5,14 @@ from processororEdit.processorBase import processorBase
 
 class highlightProcessor(processorBase):
 
-    OUT_DIR = "./processedPicture/"
+    def process(self, filePath, savePath, factor):
 
+        fileName = filePath.split("/")
 
-    def process(self, filepath, factor):
-
-        outFilename = os.path.basename(filepath)
+        outFilename = os.path.basename(fileName[1])
 
         # 画像を開く
-        image = Image.open(filepath)
+        image = Image.open(filePath)
 
         # 明るい領域を抽出
         bright_pixels = image.point(lambda p: p * factor if p > 128 else p)
@@ -21,7 +20,7 @@ class highlightProcessor(processorBase):
         bright_array = np.array(bright_pixels)
 
         corrected_image = Image.fromarray(bright_array.astype('uint8'))
-        corrected_image.save(self.OUT_DIR + outFilename)
+        corrected_image.save(savePath + outFilename)
 
         return(outFilename, 5)
 

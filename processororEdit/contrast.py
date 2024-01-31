@@ -4,15 +4,15 @@ import numpy as np
 from processororEdit.processorBase import processorBase
 
 class contrastProcessor(processorBase):
-    
-    OUT_DIR = "./processedPicture/"
 
-    def process(self, filepath, factor):
+    def process(self, filePath, savePath, factor):
 
-        outFilename = os.path.basename(filepath)
+        fileName = filePath.split("/")
+
+        outFilename = os.path.basename(fileName[1])
 
         # 画像を開く
-        image = Image.open(filepath)
+        image = Image.open(filePath)
 
         # コントラストを調整する
         enhancer = ImageEnhance.Contrast(image)
@@ -21,5 +21,5 @@ class contrastProcessor(processorBase):
         high_contrast_array = np.array(high_contrast_image)
         
         corrected_image = Image.fromarray(high_contrast_array.astype('uint8'))
-        corrected_image.save(self.OUT_DIR + outFilename)
+        corrected_image.save(savePath + outFilename)
         return(outFilename, 4)

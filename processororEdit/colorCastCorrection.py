@@ -5,15 +5,15 @@ import os, cv2
 
 class colorCastCorrectionProcessor:
 
-    OUT_DIR = "./processedPicture/"
-
     # 引数の数が多いためよくない
-    def process(self, filepath, red_factor, green_factor, blue_factor):
+    def process(self, filePath, savePath, red_factor, green_factor, blue_factor):
 
-        outFilename = os.path.basename(filepath)
+        fileName = filePath.split("/")
+
+        outFilename = os.path.basename(fileName[1])
 
         # 画像を開く
-        image = Image.open(self, filepath)
+        image = Image.open(filePath)
 
         # 画像をNumPy配列に変換
         img_array = np.array(image)
@@ -27,7 +27,7 @@ class colorCastCorrectionProcessor:
         corrected_image = Image.fromarray(img_array.astype('uint8'))
 
     # 補正後の画像を表示するか保存するかなどの処理を追加
-        corrected_image.save(self.OUT_DIR + outFilename)
+        corrected_image.save(savePath + outFilename)
 
 
         return(outFilename, 1)

@@ -5,11 +5,13 @@ from processorColor.processorBase import processorBase
 
 class redGreenHalfProcessor(processorBase):
 
-    OUT_DIR = "./processedPicture/"
+    def process(self, filePath, savePath):
 
-    def process(self, filepath):
-        outFilename = os.path.basename(filepath)
-        img_redgreenCut = cv2.imread(filepath)
+        fileName = filePath.split("/")
+
+        outFilename = os.path.basename(fileName[1])
+
+        img_redgreenCut = cv2.imread(filePath)
     
         # 画像処理
         rows, cols, channels = img_redgreenCut.shape
@@ -23,6 +25,6 @@ class redGreenHalfProcessor(processorBase):
                     continue
                 img_redgreenCut[y, x] = b, g//2, r//2
 
-        cv2.imwrite(self.OUT_DIR + outFilename, img_redgreenCut)
+        cv2.imwrite(savePath + outFilename, img_redgreenCut)
 
         return(outFilename, 5)

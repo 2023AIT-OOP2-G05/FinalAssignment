@@ -7,9 +7,13 @@ class blueRedHalfProcessor(processorBase):
 
     OUT_DIR = "./processedPicture/"
 
-    def process(self, filepath):
-        outFilename = os.path.basename(filepath)
-        img_blueredCut = cv2.imread(filepath)
+    def process(self, filePath, savePath):
+
+        fileName = filePath.split("/")
+
+        outFilename = os.path.basename(fileName[1])
+
+        img_blueredCut = cv2.imread(filePath)
     
         # 画像処理
         rows, cols, channels = img_blueredCut.shape
@@ -23,6 +27,6 @@ class blueRedHalfProcessor(processorBase):
                     continue
                 img_blueredCut[y, x] = b//2, g, r//2
 
-        cv2.imwrite(self.OUT_DIR + outFilename, img_blueredCut)
+        cv2.imwrite(savePath + outFilename, img_blueredCut)
 
         return(outFilename, 3)
