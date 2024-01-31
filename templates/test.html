@@ -28,14 +28,14 @@
             }
         </style>
     </head>
-    <body>
+    <body style="background-color: lightblue;">
         <header class="sticky-top">
             <nav class="navbar navbar-light bg-dark">
                 <div class="container">
                     <span class="navbar-brand text-white mb-0 h1">FinalAssignment</span>
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/">Topページ</a>
+                            <a class="nav-link text-white" href="/Top">Topページ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="/upAndDel">アップロード</a>
@@ -46,11 +46,6 @@
         </header>
 
         <div class="row mt-5" style="margin-left: 15%; margin-right: 15%;">
-            <p class="col-6">
-                選択されたモード：{{ data['mode'] }}<br>
-                選択された画像　：{{ data['image'] }}<br>
-                問題用の画像　　：{{ data['question'] }}
-            </p>
             <p class="col-6"></p>
             <div class="row col-12">
                 <div class="col-md-5 mt-3">
@@ -69,6 +64,9 @@
             <div>
                 <form class="select-answer row col-12 mt-3">
                     <div class="col-md-12">
+                        {% if data['mode'] == "1" %}
+                        <h2 class="text-center">どの色の成分（RGB）を抜いているか？</h2>
+                        {% endif %}
                         <h2 class="text-center">解答欄</h2>
                     </div>
                     
