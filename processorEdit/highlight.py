@@ -1,7 +1,7 @@
 from PIL import Image, ImageEnhance
 import os, cv2
 import numpy as np 
-from processororEdit.processorBase import processorBase
+from processorEdit.processorBase import processorBase
 
 class highlightProcessor(processorBase):
 
@@ -15,7 +15,7 @@ class highlightProcessor(processorBase):
         image = Image.open(filePath)
 
         # 明るい領域を抽出
-        bright_pixels = image.point(lambda p: p * factor if p > 128 else p)
+        bright_pixels = image.point(lambda p: p * factor if p > 25 else p)
 
         bright_array = np.array(bright_pixels)
 
