@@ -4,12 +4,12 @@ from processorColor.greenCut import greenCutProcessor
 from processorColor.blueRedHalf import blueRedHalfProcessor
 from processorColor.blueGreenHalf import blueGreenHalfProcessor
 from processorColor.redGreenHalf import redGreenHalfProcessor
-from processororEdit.colorTemperature import  colorTemperatureProcessor
-from processororEdit.colorCastCorrection import colorCastCorrectionProcessor
-from processororEdit.saturation import saturationProcessor
-from processororEdit.exposureAmount import exposureAmountProcessor
-from processororEdit.contrast import contrastProcessor
-from processororEdit.highlight import highlightProcessor
+from processorEdit.colorTemperature import  colorTemperatureProcessor
+from processorEdit.colorTemperature2 import colorTemperature2Processor
+from processorEdit.saturation import saturationProcessor
+from processorEdit.exposureAmount import exposureAmountProcessor
+from processorEdit.contrast import contrastProcessor
+from processorEdit.highlight import highlightProcessor
 import os, shutil
 
 def blue(filePath, savePath):
@@ -52,25 +52,25 @@ def colorTemperature(filePath, savePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(colorTemperatureProcessor().process(filePath, savePath, 1.5))
+    return(colorTemperatureProcessor().process(filePath, savePath, 2.0))
 
-def colorCastCorrection(filePath, savePath):
+def colorTemperature2(filePath, savePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(colorCastCorrectionProcessor().process(filePath, savePath, 1.2, 0.8, 1.0))
+    return(colorTemperature2Processor().process(filePath, savePath, 0.5))
 
 def saturation(filePath, savePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(saturationProcessor().process(filePath, savePath, 3))
+    return(saturationProcessor().process(filePath, savePath, 0.1))
 
 def exposureAmount(filePath, savePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')
     # print(r) # True (存在する)
 
-    return(exposureAmountProcessor().process(filePath, savePath, 1.5))
+    return(exposureAmountProcessor().process(filePath, savePath, 0.2))
 
 def contrast(filePath, savePath):
     # r = os.path.exists('uploadsPicture/liberoPAUI4519_TP_V.jpeg')

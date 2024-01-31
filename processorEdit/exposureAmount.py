@@ -1,7 +1,7 @@
 from PIL import Image, ImageEnhance
 import os, cv2
 import numpy as np 
-from processororEdit.processorBase import processorBase
+from processorEdit.processorBase import processorBase
 
 class exposureAmountProcessor(processorBase):
 

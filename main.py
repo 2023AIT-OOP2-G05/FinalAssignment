@@ -79,22 +79,10 @@ def deletePicture():
 
     return "deleted"
 
-    # files = glob.glob("./uploadsPicture/*")  # ./uploadsPicture/以下のファイルをすべて取得
-    # urls = []
-    # index = 0
-    # for file in files:
-    #     urls.append({
-    #         "filename": os.path.basename(file),
-    #         "url": "/uploaded/" + os.path.basename(file),
-    #         "index": index
-    #     })
-    #     index = index + 1
-    # return render_template("pictureList.html", title="アップロード済み画像", page_title="画像処理クイズ", target_files=urls)
-
+# スタート画面
 @app.route('/')
 def startPage():
     return render_template("topPage.html")
-
 
 # アップロード済み画像一覧
 @app.route('/Top')
@@ -161,7 +149,7 @@ def setData():
             case 0:
                 outputPath = processors.colorTemperature(filepath, savePath)
             case 1:
-                outputPath = processors.colorCastCorrection(filepath, savePath)
+                outputPath = processors.colorTemperature2(filepath, savePath)
             case 2:
                 outputPath = processors.saturation(filepath, savePath)
             case 3:
@@ -205,9 +193,9 @@ def test():
 
     # 解答欄の選択肢を追加
     if selectData['mode'] == "1":
-        selectData['sample'] = ["青抜き", "赤抜き", "緑抜き", "青赤半分", "青緑半分", "赤緑半分"]
+        selectData['sample'] = ["青抜き", "赤抜き", "緑抜き", "青赤半分ずつ", "青緑半分ずつ", "赤緑半分ずつ"]
     elif selectData['mode'] == "2":
-        selectData['sample'] = ["色温度", "色被り補正", "彩度", "露光量", "コントラスト", "ハイライト"]
+        selectData['sample'] = ["色温度(暖色)", "色温度(寒色)", "彩度(ほぼ０)", "露光量(減少)", "コントラスト(増加)", "ハイライト(増加)"]
     return render_template("test.html", data = selectData)
 
 #単語問題のページ
@@ -245,7 +233,7 @@ def wordquiz():
 
     json_data[-1]["finalAnsNum"] = finalAnsNum
     with open('quiz.json', 'w') as f:
-        json.dump(json_data, f, indent=2)
+        json.dump(json_data, f, indent=2, ensure_ascii=False)
 
     data = {'question':json_data[quesnum]['ans'], 'ans1':cleandata[num1], 'ans2':cleandata[num2],'ans3':cleandata[num3],'finalAnsNum': finalAnsNum}
     #問題選択肢を送るために辞書式にぶちこむ
@@ -319,7 +307,7 @@ def check():
             case "0":
                 outputPath = processors.colorTemperature(filePath, savePath)
             case "1":
-                outputPath = processors.colorCastCorrection(filePath, savePath)
+                outputPath = processors.colorTemperature2(filePath, savePath)
             case "2":
                 outputPath = processors.saturation(filePath, savePath)
             case "3":
