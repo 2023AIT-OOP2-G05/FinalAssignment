@@ -90,8 +90,14 @@ def deletePicture():
     # return render_template("pictureList.html", title="アップロード済み画像", page_title="画像処理クイズ", target_files=urls)
 
 
-# アップロード済み画像一覧
+# スタート画面
 @app.route('/')
+def startPage():
+    return render_template("topPage.html")
+
+
+# アップロード済み画像一覧
+@app.route('/Top')
 def uploaded_list():
     files = glob.glob("./uploadsPicture/*")  # ./uploadsPicture/以下のファイルをすべて取得
     urls = []
@@ -129,7 +135,6 @@ def setData():
     processors.deleteOneImage("./processedPicture")
     
     if mode == 1:
-        
         # 問題をランダムに選ぶためのrandom変数
         num = random.randint(0,5)
         match num:
