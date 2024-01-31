@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = './uploadsPicture'
 # 回答用のエンドポイントを追加
 app.config['PROCESSED_FOLDER'] = './processedPicture'
+# 解説用のエンドポイントを追加
+app.config['EXPLANATION_FOLDER'] = './explanationPicture'
 
 app.config["JSON_AS_ASCII"] = False  # 日本語などのASCII以外の文字列を返したい場合は、こちらを設定しておく
 
@@ -114,59 +116,61 @@ def setData():
     
     # 変換前画像のファイル名を取得
     fileName = selectData["image"]
+
+    # アップロード画像にアクセスするためのファイルパスを作成
     filepath = "uploadsPicture/" +fileName
-    print(selectData["image"])
+
     # int型のモード識別用変数
     mode = int(selectData["mode"]) #元はstr
-    print(selectData["mode"])
-    # 問題をランダムに選ぶためのrandom変数
-    # num = random.randint(0,1)
 
     # processors戻り値を保持する変数(tuple型)
     outputPath = None
+
     # 画像処理後の画像を保存するディレクトリを初期化
     processors.deleteOneImage("./processedPicture")
-    
+
+    # ファイルの画像保存先パスを作成
+    savePath = "./processedPicture/"
+
     if mode == 1:
         # Cut系
         # 問題をランダムに選ぶためのrandom変数
         num = random.randint(0,5)
         match num:
             case 0:
-                outputPath = processors.blue(filepath)
+                outputPath = processors.blue(filepath, savePath)
             case 1:
-                outputPath = processors.red(filepath)
+                outputPath = processors.red(filepath, savePath)
             case 2:
-                outputPath = processors.green(filepath)
+                outputPath = processors.green(filepath, savePath)
             case 3:
-                outputPath = processors.blueRed(filepath)
+                outputPath = processors.blueRed(filepath, savePath)
             case 4:
-                outputPath = processors.blueGreen(filepath)
+                outputPath = processors.blueGreen(filepath, savePath)
             case 5:
-                outputPath = processors.redGreen(filepath)
+                outputPath = processors.redGreen(filepath, savePath)
     elif mode == 2:
         # Color系
         # 問題をランダムに選ぶためのrandom変数
         num = random.randint(0,5)
         match num:
             case 0:
-                outputPath = processors.colorTemperature(filepath)
+                outputPath = processors.colorTemperature(filepath, savePath)
             case 1:
-                outputPath = processors.colorCastCorrection(filepath)
+                outputPath = processors.colorCastCorrection(filepath, savePath)
             case 2:
-                outputPath = processors.saturation(filepath)
+                outputPath = processors.saturation(filepath, savePath)
             case 3:
-                outputPath = processors.exposureAmount(filepath)
+                outputPath = processors.exposureAmount(filepath, savePath)
             case 4:
-                outputPath = processors.contrast(filepath)
+                outputPath = processors.contrast(filepath, savePath)
             case 5:
-                outputPath = processors.highlight(filepath)
+                outputPath = processors.highlight(filepath, savePath)
     elif mode == 3:
         # 文章問題ページへ遷移...？
         # return redirect(url_for('wordquiz'))
         pass
 
-    print(outputPath)
     # 画像処理後のファイル名をjsonに追加
     selectData["question"] = outputPath[0]
     selectData["idNum"] = str(outputPath[1])
@@ -238,25 +242,92 @@ def wordquiz():
 def check():
     # 回答を取得
     # answer = request.data.decode("utf-8")
-    selectId = request.form.to_dict()
-    print(selectId["selectId"])
+    selectData = request.form.to_dict()
+
+    print("セレクトデータ")
+    print(selectData)
 
     with open('selectData.json') as f:
         # 既存のデータを読み込み
         jsonData = list(json.load(f))
     
     # 押されたボタンの識別番号
-    jsonData[0]['selectId'] = selectId["selectId"]
+    jsonData[0]['selectId'] = selectData["selectId"]
+
+    print("jsonデータ")
+    print(jsonData)
 
     # 正誤判定（正解:"True", 不正解:"False"）
-    if jsonData[0]["idNum"] == selectId["selectId"]:
+    if jsonData[0]["idNum"] == selectData["selectId"]:
         jsonData[0]["result"] = "True"
+        print("トゥルー")
     else:
         jsonData[0]["result"] = "False"
+        print("フォルス")
+
+    # 変換前画像のファイル名を取得
+    fileName = jsonData[0]["image"]
+
+    # アップロード画像にアクセスするためのファイルパスを作成
+    filePath = "uploadsPicture/" +fileName
+
+    # 画像処理後の画像を保存するディレクトリを初期化
+    processors.deleteOneImage("./explanationPicture")
+
+    # ファイルの画像保存先パスを作成
+    savePath = "./explanationPicture/"
+
+    # processors戻り値を保持する変数(tuple型)
+    outputPath = None
+
+    print("jsonデータの型")
+    print(type(jsonData))
+
+    if jsonData[0]["mode"] == "1":
+        # Cut系
+        match selectData["selectId"]:
+            case "0":
+                outputPath = processors.blue(filePath, savePath)
+            case "1":
+                outputPath = processors.red(filePath, savePath)
+            case "2":
+                outputPath = processors.green(filePath, savePath)
+            case "3":
+                outputPath = processors.blueRed(filePath, savePath)
+            case "4":
+                outputPath = processors.blueGreen(filePath, savePath)
+            case "5":
+                outputPath = processors.redGreen(filePath, savePath)
+    elif jsonData[0]["mode"] == "2":
+        # Color系
+        match selectData["selectId"]:
+            case "0":
+                outputPath = processors.colorTemperature(filePath, savePath)
+            case "1":
+                outputPath = processors.colorCastCorrection(filePath, savePath)
+            case "2":
+                outputPath = processors.saturation(filePath, savePath)
+            case "3":
+                outputPath = processors.exposureAmount(filePath, savePath)
+            case "4":
+                outputPath = processors.contrast(filePath, savePath)
+            case "5":
+                outputPath = processors.highlight(filePath, savePath)
+    elif jsonData[0]["mode"] == "3":
+        # 文章問題ページへ遷移...？
+        # return redirect(url_for('wordquiz'))
+        pass
+
+    # 画像処理後のファイル名をjsonに追加
+    jsonData[0]["explanation"] = outputPath[0]
+
+    print("ここ")
+    print(jsonData)
 
     with open('selectData.json', mode="w") as f:
         # 選択されたデータを'selectData.json'に上書き
         json.dump(jsonData, f, indent=4)
+
     return jsonify(jsonData[0])
 
 
@@ -274,27 +345,11 @@ def answerPage():
     print("mode -> ",mode)
     print("id -> ",selectId)
 
-    # <!--TODO-->
-    # 
-    # おそらく、この辺りで解説ページ用の画像処理を行う必要がある
-    #
-    # 選出方法は、問題ランダム選出と同じく、
-    # match-case文でjsonのselectId(かな?)の値を分別すればいい
-    #
-    # 各画像処理関数の使用を変更する必要あり
-    # ・保存先のファイルパスを、呼び出し側で変更する必要がある
-    #   outputPath = processors.blueGreen("./processedPicture" +filepath) や
-    #   outputPath = processors.blueGreen("./explanationPicture" +filepath) のように
-    #
-    # ・解説用画像を保存するディレクトリを作成する必要がある(explanationPictureみたいな？)
-    #
-    # ・explanationPictureディレクトリの初期化も行う必要がある(この辺で初期化？)
-
     selectData = jsonData[0]
     # 変換前画像パスを追加
     selectData.update(image="/uploaded/" + selectData['image'])
     # 変換後の画像パスを追加
-    selectData.update(question="/processed/" + selectData['question'])
+    selectData.update(explanation="/explanation/" + selectData['explanation'])
     selectData['anstitle'] = answerData[0][mode][selectId]['anstitle']
     selectData['anscontent'] = answerData[0][mode][selectId]['anscontent']
     return render_template("answerPageLayout.html", data=selectData)
@@ -318,7 +373,12 @@ def uploaded_file(filename):
 def processed_file(filename):
     return send_from_directory(app.config['PROCESSED_FOLDER'], filename)
 
+# 解説用画像画像用エンドポイント
+@app.route('/explanation/<path:filename>')
+def explanation_file(filename):
+    return send_from_directory(app.config['EXPLANATION_FOLDER'], filename)
+
 if __name__ == "__main__":
     # debugモードが不要の場合は、debug=Trueを消してください
-    app.run(debug=True)
-    #app.run(host="localhost",port=8888,debug=True)
+    #app.run(debug=True)
+    app.run(host="localhost",port=8888,debug=True)

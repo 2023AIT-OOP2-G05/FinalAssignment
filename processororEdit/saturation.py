@@ -5,15 +5,15 @@ from processororEdit.processorBase import processorBase
 
 class saturationProcessor(processorBase):
 
-    OUT_DIR = "./processedPicture/"
+    def process(self, filePath, savePath, factor):
 
-    def process(self, filepath, factor):
+        fileName = filePath.split("/")
 
-        outFilename = os.path.basename(filepath)
+        outFilename = os.path.basename(fileName[1])
         # img_saturated = cv2.imread(filepath)
 
         # 画像を開く
-        image = Image.open(filepath)
+        image = Image.open(filePath)
 
         # 彩度を調整する
         enhancer = ImageEnhance.Color(image)
@@ -22,7 +22,7 @@ class saturationProcessor(processorBase):
         saturated_array = np.array(saturated_image)
 
         corrected_image = Image.fromarray(saturated_array.astype('uint8'))
-        corrected_image.save(self.OUT_DIR + outFilename)
+        corrected_image.save(savePath + outFilename)
         return(outFilename, 2)
 
    

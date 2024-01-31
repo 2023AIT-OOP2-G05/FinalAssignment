@@ -5,14 +5,14 @@ from processororEdit.processorBase import processorBase
 
 class colorTemperatureProcessor(processorBase):
 
-    OUT_DIR = "./processedPicture/"
+    def process(self, filePath, savePath, factor):
 
-    def process(self, filepath, factor):
+        fileName = filePath.split("/")
 
-        outFilename = os.path.basename(filepath)
+        outFilename = os.path.basename(fileName[1])
 
         # 画像を開く
-        image = Image.open(filepath)
+        image = Image.open(filePath)
 
         # 色温度を調整する
         enhancer = ImageEnhance.Color(image)
@@ -22,7 +22,7 @@ class colorTemperatureProcessor(processorBase):
 
         corrected_image = Image.fromarray(adjusted_array.astype('uint8'))
 
-        corrected_image.save(self.OUT_DIR + outFilename)
+        corrected_image.save(savePath + outFilename)
 
 
         return(outFilename, 0)
